@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Agente Personalizado - Ahorra hasta 30% en tu factura de luz</title>
+    <meta name="description" content="Especialistas en optimización energética. Más de 100 clientes satisfechos con ahorros del 30% en sus facturas de luz y gas.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Variables de color */
+        :root {
+            --primary-green: #0D4F3C;
+            --accent-green: #2E8B57;
+            --light-green: #48C78E;
+            --emerald: #00D4AA;
+            --primary-dark: #1a1a1a;
+            --secondary-dark: #2c3e50;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --background-light: #f8fffe;
+            --white: #ffffff;
+            --success: #00C851;
+
+            /* Colores específicos para la sección de precios */
+            --gana-100: #e6f7f0;
+        }
+
+        /* Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        #mainHeader {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Sutil sombra para el header */
+        }
+
+        #mainHeader .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: var(--accent-green);
+            font-size: 1.3em;
+            gap: 8px;
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-desktop a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-desktop a:hover {
+            color: var(--accent-green);
+        }
+
+        .mobile-nav-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001; /* Asegura que el botón esté por encima del menú móvil */
+        }
+
+        .mobile-nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent-green);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .mobile-nav-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-6px, 6px);
+        }
+
+        .mobile-nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-nav-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-6px, -6px);
+        }
+
+        /* Novedad: Menú móvil */
+        .nav-mobile {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding-top: 80px; /* Espacio para el header */
+            z-index: 999;
+            display: flex; /* Usar flex para los enlaces internos */
+            flex-direction: column;
+            
+            /* Animación y visibilidad */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(100%); /* Inicialmente fuera de la vista a la derecha */
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        }
+
+        .nav-mobile.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0); /* Desliza a la posición normal */
+        }
+
+        .nav-mobile a {
+            display: block;
+            padding: 1rem 20px;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-mobile a:hover {
+            background: rgba(13, 79, 60, 0.05);
+            color: var(--accent-green);
+            padding-left: 30px; /* Efecto visual al pasar el mouse */
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, #fefffe 0%, #f8fffe 50%, rgba(13, 79, 60, 0.03) 100%); /* Fallback y fondo sutil */
+            overflow: hidden;
+            color: var(--white); /* Color del texto para que contraste con el video */
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Asegura que el video cubra todo el espacio */
+            z-index: 1; /* Detrás del contenido */
+        }
+
+        .hero-overlay { /* Capa para oscurecer el video y mejorar la legibilidad */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Color oscuro semi-transparente */
+            z-index: 1;
+        }
+
+        .hero-bg {
+            display: none; /* Ocultamos el elemento hero-bg original ya que ahora tenemos un video */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2; /* Por encima del video y el overlay */
+            max-width: 600px;
+            text-align: left; /* Alineación del texto, ajustar si el video lo requiere */
+            color: var(--white); /* Asegura que el texto sea blanco sobre el overlay */
+            padding: 20px; /* Padding para que el contenido no toque los bordes en móviles */
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(var(--light-green), 0.1); /* Utiliza la variable de color con transparencia */
+            color: var(--light-green); /* Color del texto del badge */
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(var(--light-green), 0.3); /* Borde sutil */
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white); /* Texto principal blanco */
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra para mejor legibilidad */
+        }
+
+        .highlight {
+            color: var(--emerald); /* Color de resaltado diferente para contraste */
+            /* Quitar -webkit-background-clip y -webkit-text-fill-color si el texto ya es blanco */
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9); /* Subtítulo ligeramente menos opaco */
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap; /* Añadido para que los CTAs se envuelvan en pantallas pequeñas */
+        }
+
+        .btn-primary, .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-green), var(--accent-green));
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(13, 79, 60, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--light-green); /* Ajustar color del botón secundario para que contraste */
+            border: 2px solid var(--light-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light-green);
+            color: var(--primary-dark); /* Texto oscuro al pasar el mouse */
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            background-color: rgba(0, 0, 0, 0.3); /* Fondo semitransparente para las estadísticas */
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px); /* Efecto de desenfoque */
+            width: fit-content; /* Ajusta el ancho al contenido */
+        }
+
+        .stat {
+            text-align: center;
+            color: var(--white); /* Texto blanco */
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--emerald); /* Color de acento para los números */
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* SECTIONS GENERAL */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        /* SERVICES */
+        .services {
+            background: linear-gradient(180deg, var(--white) 0%, var(--background-light) 100%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid #f0f0f0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-card.featured {
+            border: 2px solid var(--accent-green);
+            transform: scale(1.03); /* Ligeramente más grande */
+            box-shadow: 0 10px 30px rgba(13, 79, 60, 0.2);
+        }
+
+        .service-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--accent-green);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-green), var(--accent-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card ul {
+            list-style: none;
+        }
+
+        .service-card li {
+            padding: 5px 0;
+            color: var(--text-light);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .service-card li:before {
+            content: "✓";
+            color: var(--accent-green);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* HOW IT WORKS */
+        .how-it-works {
+            background: linear-gradient(180deg, rgba(13, 79, 60, 0.02) 0%, var(--white) 100%);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-green), var(--accent-green));
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 5px 15px rgba(13, 79, 60, 0.2);
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .step p {
+            color: var(--text-light);
+        }
+
+        /* RESULTS */
+        .results {
+            background: var(--white);
+        }
+
+        .results-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .results-text h2 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .results-text p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .results-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-green);
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .savings-chart {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .chart-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end; /* Alinea las barras a la parte inferior */
+            justify-content: space-around;
+            height: 200px;
+            margin-bottom: 1rem;
+        }
+
+        .bar-group {
+            text-align: center;
+            display: flex; /* Para centrar la etiqueta debajo de la barra */
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bar {
+            width: 80px;
+            border-radius: 5px 5px 0 0;
+            margin-bottom: 10px; /* Espacio entre barra y etiqueta */
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .bar.before {
+            background: linear-gradient(to top, #ff6b6b, #ff8e8e);
+            height: 160px; /* Representa el 100% */
+        }
+
+        .bar.after {
+            background: linear-gradient(to top, var(--primary-green), var(--accent-green));
+            height: 112px; /* Representa el 70% (30% de ahorro) */
+        }
+
+        .arrow {
+            font-size: 2rem;
+            color: var(--accent-green);
+            align-self: center;
+            margin: 0 1rem;
+        }
+
+        .chart-saving {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            background: rgba(13, 79, 60, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        /* PRECIOS EN TIEMPO REAL  */
+        .prices-section {
+            background: var(--background-light);
+        }
+
+        .price-display {
+            max-width: 600px; /* Limita el ancho para que no se extienda demasiado */
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .price-display .bold {
+            font-weight: bold;
+        }
+        
+        /* Font sizes from example */
+        .fsl { font-size: 1.5rem; } /* Large */
+        .fss { font-size: 0.9rem; } /* Small */
+        .fsxs { font-size: 0.75rem; } /* Extra Small */
+        .med { font-size: 2rem; font-weight: 600; } /* Medium for numbers */
+
+        /* Margins from example */
+        .mt-8 { margin-top: 2rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mt-2 { margin-top: 0.5rem; }
+
+
+        .grid-cols-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .grid-cols-2 { /* Para la sección de potencia */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .bg-gana-100 {
+            background-color: var(--gana-100);
+        }
+
+        .gap-3 {
+            gap: 0.75rem;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .rounded-3xl {
+            border-radius: 1.5rem; /* 24px */
+        }
+
+        .p-3 {
+            padding: 0.75rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        /* FIN PRECIOS EN TIEMPO REAL */
+
+
+        /* CALCULADORA DE PRECIOS */
+        .calculator-section {
+            background: var(--white);
+        }
+
+        .calculator-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            background: var(--background-light);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: left;
+        }
+
+        .calculator-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .calculator-form label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+
+        .calculator-form input[type="number"],
+        .calculator-form select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--text-dark);
+            background-color: var(--white);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .calculator-form input[type="number"]:focus,
+        .calculator-form select:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.2);
+        }
+
+        .calculator-form button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--primary-green), var(--accent-green));
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .calculator-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(13, 79, 60, 0.4);
+        }
+
+        /* FIN CALCULADORA DE PRECIOS */
+
+        /* MODAL STYLES */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 2000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: auto;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .close-button {
+            color: var(--text-light);
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--primary-dark);
+            text-decoration: none;
+        }
+
+        .modal-content h3 {
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .modal-content .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .modal-content input[type="text"],
+        .modal-content input[type="tel"],
+        .modal-content input[type="email"],
+        .modal-content textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .modal-content input[type="text"]:focus,
+        .modal-content input[type="tel"]:focus,
+        .modal-content input[type="email"]:focus,
+        .modal-content textarea:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.2);
+        }
+
+        .modal-content textarea {
+            resize: vertical; /* Allow vertical resizing */
+            min-height: 80px;
+        }
+
+        .modal-content button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, var(--primary-green), var(--accent-green));
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+        }
+
+        .modal-content button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(13, 79, 60, 0.3);
+        }
+
+        /* Styles specifically for calculator results in modal */
+        .modal-content .calculator-results { /* Asegura que se muestre cuando el modal esté activo */
+            display: block; 
+            opacity: 1;
+            transition: none; /* No necesitamos transición aquí ya que el modal ya la maneja */
+        }
+
+
+        .modal-content .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+            color: var(--text-dark);
+            font-size: 1rem; /* Ajustar fuente para el modal */
+        }
+        .modal-content .result-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: var(--accent-green);
+            margin-top: 1rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--accent-green);
+        }
+        .modal-content .result-item span:first-child {
+            font-weight: 500;
+        }
+
+        .modal-content .result-value {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        .modal-content .result-item:last-child .result-value {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+        }
+
+        .modal-content .btn-primary {
+            margin-top: 2rem;
+            width: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1rem;
+            padding: 12px 25px;
+        }
+
+        /* END MODAL STYLES */
+
+
+        /* TESTIMONIALS */
+        .testimonials {
+            background: var(--white); /* Ajustado para que no repita el color de precios */
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 3rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .testimonial-content p {
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .author-name {
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .author-role {
+            color: var(--accent-green);
+            font-size: 0.9rem;
+        }
+
+        /* FINAL CTA */
+        .final-cta {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-dark));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .final-cta .btn-primary {
+            background: var(--light-green);
+            color: var(--primary-dark);
+        }
+
+        .final-cta .btn-primary:hover {
+            background: var(--emerald);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(72, 199, 142, 0.3);
+        }
+
+        .final-cta .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border-color: var(--white);
+        }
+
+        .final-cta .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-dark);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.9;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .footer-links h4 {
+            color: var(--light-green);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-contact h4 {
+            color: var(--light-green); /* Usamos light-green para este */
+            margin-bottom: 1rem;
+        }
+
+        .footer-contact .contact-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-contact a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 1rem;
+            text-align: center;
+            color: #999;
+        }
+
+        /* FLOATING WHATSAPP BUTTON */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 28px;
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+        }
+
+        .whatsapp-float .tooltip {
+            visibility: hidden;
+            width: 120px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            right: 100%; /* A la izquierda del botón */
+            margin-right: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .whatsapp-float:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            /* Header Mobile */
+            .nav-desktop {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: flex;
+            }
+
+            /* Hero Mobile */
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 100px 0 50px;
+                text-align: center; /* Centrar el contenido en móviles */
+                justify-content: center; /* Centrar contenido verticalmente */
+            }
+
+            .hero-content {
+                text-align: center; /* Centrar el contenido */
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+                padding: 12px 20px;
+            }
+
+            /* MODIFICACIÓN: hero-stats horizontal en móvil */
+            .hero-stats {
+                flex-direction: row; /* Cambia a fila */
+                flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+                justify-content: center; /* Centra los elementos */
+                gap: 1rem; /* Reduce el espacio entre elementos */
+                text-align: center;
+                margin: 0 auto;
+                width: 100%; /* Asegura que ocupe todo el ancho disponible */
+                padding: 1rem; /* Ajusta el padding */
+            }
+            .stat {
+                flex-basis: calc(33% - 1rem); /* Ajusta para 3 elementos por fila */
+                min-width: 90px; /* Asegura un ancho mínimo para cada stat */
+            }
+            /* Services Mobile */
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .service-card.featured {
+                transform: none; /* Quita la transformación extra en móviles */
+                order: -1; /* Mueve la tarjeta destacada al principio */
+            }
+
+            .service-card {
+                padding: 2rem;
+            }
+
+            /* Steps Mobile */
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            /* Results Mobile */
+            .results-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .results-metrics {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Ajusta para pantallas más pequeñas */
+            }
+
+            .chart-bars {
+                height: 150px;
+            }
+
+            .bar {
+                width: 60px;
+            }
+
+            .bar.before {
+                height: 120px;
+            }
+
+            .bar.after {
+                height: 84px;
+            }
+
+            /* Prices Mobile */
+            .price-display {
+                padding: 1rem;
+            }
+            .fsl { font-size: 1.3rem; }
+            .med { font-size: 1.8rem; }
+            .fss { font-size: 0.85rem; }
+            .fsxs { font-size: 0.7rem; }
+
+            /* Calculator Mobile */
+            .calculator-container {
+                padding: 1.5rem;
+            }
+            .calculator-form label {
+                font-size: 1rem;
+            }
+            .calculator-form input, .calculator-form select, .calculator-form button {
+                padding: 10px;
+                font-size: 1rem;
+            }
+            
+            /* Modal Mobile */
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
+            .modal-content h3 {
+                font-size: 1.5rem;
+            }
+            .modal-content .result-item {
+                font-size: 0.9rem;
+            }
+            .modal-content .result-item:last-child {
+                font-size: 1.1rem;
+            }
+            .modal-content .result-item:last-child .result-value {
+                font-size: 1.3rem;
+            }
+
+
+            /* Testimonials Mobile */
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* CTA Final Mobile */
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            /* Footer Mobile */
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-brand {
+                text-align: center;
+            }
+
+            /* WhatsApp button mobile adjustment */
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 22px;
+            }
+
+            .whatsapp-float .tooltip {
+                display: none; /* Oculta el tooltip en móvil para no estorbar */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .results-text h2, .cta-content h2, .testimonials h2 {
+                font-size: 2rem;
+            }
+
+            .savings-chart {
+                padding: 1rem;
+            }
+
+            .chart-bars {
+                height: 120px;
+            }
+
+            .bar {
+                width: 50px;
+            }
+
+            .bar.before {
+                height: 100px;
+            }
+
+            .bar.after {
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="mainHeader">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>Tu Agente Personalizado</span>
+            </div>
+            <nav class="nav-desktop">
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#como-funciona">Cómo funciona</a>
+                <a href="#resultados">Resultados</a>
+                <a href="#precios">Precios</a>
+                <a href="#calculadora">Calculadora</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+            <button class="mobile-nav-toggle" aria-label="Menú móvil">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <nav class="nav-mobile">
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#como-funciona">Cómo funciona</a>
+            <a href="#resultados">Resultados</a>
+            <a href="#precios">Precios</a>
+            <a href="#calculadora">Calculadora</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <video class="hero-video-bg" src="https://cdn.pixabay.com/video/2021/08/10/84625-585553989_large.mp4" autoplay loop muted playsinline poster="https://cdn.pixabay.com/photo/2016/11/29/05/45/astronomy-1867616_1280.jpg"></video>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge" data-aos="fade-right">
+                    <i class="fas fa-bolt"></i>
+                    <span>Especialistas en ahorro energético</span>
+                </div>
+                <h1 data-aos="fade-right" data-aos-delay="100">Ahorra hasta un <span class="highlight">30%</span> en tu factura de luz</h1>
+                <p class="hero-subtitle" data-aos="fade-right" data-aos-delay="200">Optimización energética para hogares y empresas. ¡Resultados garantizados!</p>
+                <div class="hero-cta" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#calculadora" class="btn-primary">
+                        <i class="fas fa-calculator"></i>
+                        Calcula tu ahorro
+                    </a>
+                    <a href="#precios" class="btn-secondary">
+                        <i class="fas fa-chart-line"></i>
+                        Precios en tiempo real
+                    </a>
+                    <a href="https://wa.me/34691551492" class="btn-secondary" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Consulta gratuita
+                    </a>
+                </div>
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat">
+                        <span class="stat-number">+100</span>
+                        <span class="stat-label">Clientes</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">30%</span>
+                        <span class="stat-label">Ahorro medio</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">+1GWh</span>
+                        <span class="stat-label">Energía gestionada</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>¿Qué hacemos por ti?</h2>
+                <p>Nuestros servicios especializados en optimización energética</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3>Análisis personalizado</h3>
+                    <p>Estudiamos tu consumo histórico y patrones de uso para identificar oportunidades de ahorro específicas.</p>
+                    <ul>
+                        <li>Auditoría energética completa</li>
+                        <li>Análisis de tarifas actuales</li>
+                        <li>Identificación de ineficiencias</li>
+                    </ul>
+                </div>
+                <div class="service-card featured" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-badge">Más popular</div>
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Negociación experta</h3>
+                    <p>Negociamos directamente con las comercializadoras para conseguir las mejores condiciones del mercado.</p>
+                    <ul>
+                        <li>Acceso a tarifas exclusivas</li>
+                        <li>Condiciones preferenciales</li>
+                        <li>Sin permanencias abusivas</li>
+                    </ul>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Seguimiento continuo</h3>
+                    <p>Monitorizamos tu consumo mensualmente y ajustamos la estrategia para maximizar el ahorro.</p>
+                    <ul>
+                        <li>Informes mensuales detallados</li>
+                        <li>Alertas de desviaciones</li>
+                        <li>Optimización constante</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="como-funciona" class="how-it-works">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Cómo funciona nuestro servicio</h2>
+                <p>Un proceso simple y transparente en 4 pasos</p>
+            </div>
+            <div class="steps">
+                <div class="step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Análisis inicial</h3>
+                        <p>Revisamos tus últimas facturas y analizamos tu perfil de consumo sin coste alguno.</p>
+                    </div>
+                </div>
+                <div class="step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Propuesta personalizada</h3>
+                        <p>Te presentamos un plan de ahorro detallado con el potencial de reducción de costes.</p>
+                    </div>
+                </div>
+                <div class="step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Implementación</h3>
+                        <p>Nos encargamos de todos los trámites con las comercializadoras. Tú no haces nada.</p>
+                    </div>
+                </div>
+                <div class="step" data-aos="fade-up" data-aos-delay="400">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Seguimiento</h3>
+                        <p>Monitorizamos tus facturas mensualmente y optimizamos continuamente tu contrato.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resultados" class="results">
+        <div class="container">
+            <div class="results-content" data-aos="fade-up">
+                <div class="results-text">
+                    <h2>Resultados que hablan por sí solos</h2>
+                    <p>En dos años hemos ayudado a más de 100 hogares y empresas a optimizar sus costes energéticos, consiguiendo ahorros medios del 30%.</p>
+                    <div class="results-metrics">
+                        <div class="metric">
+                            <div class="metric-value">€180,000</div>
+                            <div class="metric-label">Ahorrados por nuestros clientes</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">24h</div>
+                            <div class="metric-label">Tiempo medio de respuesta</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">98%</div>
+                            <div class="metric-label">Satisfacción del cliente</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="results-visual" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="savings-chart">
+                        <div class="chart-title">Ahorro mensual promedio</div>
+                        <div class="chart-bars">
+                            <div class="bar-group">
+                                <div class="bar before" data-value="100"></div>
+                                <label>Antes</label>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="bar-group">
+                                <div class="bar after" data-value="70"></div>
+                                <label>Después</label>
+                            </div>
+                        </div>
+                        <div class="chart-saving">30% menos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    ---
+
+    <section id="precios" class="prices-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Precios de la energía hoy</h2>
+                <p>Consulta los precios promedio de la luz en este momento. ¡El mercado cambia constantemente!</p>
+            </div>
+            <div class="price-display" data-aos="fade-up" data-aos-delay="100">
+                <div>
+                    <p class="bold fsl mt-8 mb-2">Energía</p>
+                    <div class="grid grid-cols-3 bg-gana-100 gap-3 items-center rounded-3xl p-3">
+                        <div class="text-center">
+                            <p class="fss">Valle</p>
+                            <p class="med" id="price-valle">0.115</p>
+                            <p class="fsxs">€/kWh</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="fss">Llano</p>
+                            <p class="med" id="price-llano">0.144</p>
+                            <p class="fsxs">€/kWh</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="fss">Punta</p>
+                            <p class="med" id="price-punta">0.210</p>
+                            <p class="fsxs">€/kWh</p>
+                        </div>
+                    </div>
+                    <p class="fss mt-2">Precio variable. Precios medios de los últimos 30 días.</p>
+                    <p class="fss">*No se incluyen <span class="bold cursor-pointer">impuestos y otros costes</span> asociados.</p>
+                </div>
+
+                <div>
+                    <p class="bold fsl mt-8 mb-2">Potencia</p>
+                    <div class="grid grid-cols-2 bg-gana-100 gap-3 items-center rounded-3xl p-3">
+                        <div class="text-center">
+                            <p class="fss">P1</p>
+                            <p class="med" id="price-p1">0.0738</p>
+                            <p class="fsxs">€/kW día</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="fss">P2</p>
+                            <p class="med" id="price-p2">0.0019</p>
+                            <p class="fsxs">€/kW día</p>
+                        </div>
+                    </div>
+                    <p class="fss mt-2">Según BOE.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    ---
+
+    <section id="calculadora" class="calculator-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Calcula tu factura mensual estimada</h2>
+                <p>Estima el coste de tu factura con nuestra tarifa de precio fijo. Ingresa tus datos y obtén un cálculo aproximado.</p>
+            </div>
+            <div class="calculator-container" data-aos="fade-up" data-aos-delay="100">
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label for="consumo">Consumo mensual (kWh):</label>
+                        <input type="number" id="consumo" placeholder="Ej: 250" min="0" value="250">
+                    </div>
+                    <div class="form-group">
+                        <label for="potencia">Potencia contratada (kW):</label>
+                        <input type="number" id="potencia" placeholder="Ej: 4.6" step="0.1" min="0" value="4.6">
+                    </div>
+                    <div class="form-group">
+                        <label for="zona">Zona geográfica:</label>
+                        <select id="zona">
+                            <option value="peninsula">Península (IVA 21%)</option>
+                            <option value="canarias">Canarias (IGIC 7%)</option>
+                        </select>
+                    </div>
+                    <button id="calcularBtn">Calcular Factura</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    ---
+
+    <div id="billModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Tu Estimación Mensual</h3>
+            <div class="calculator-results">
+                <div class="result-item">
+                    <span>Coste por consumo:</span>
+                    <span id="modalCostoConsumo" class="result-value">€0.00</span>
+                </div>
+                <div class="result-item">
+                    <span>Coste por potencia (P1):</span>
+                    <span id="modalCostoPotenciaP1" class="result-value">€0.00</span>
+                </div>
+                <div class="result-item">
+                    <span>Coste por potencia (P2):</span>
+                    <span id="modalCostoPotenciaP2" class="result-value">€0.00</span>
+                </div>
+                <div class="result-item">
+                    <span>Financiación Bono Social:</span>
+                    <span id="modalBonoSocial" class="result-value">€0.00</span>
+                </div>
+                <div class="result-item">
+                    <span>Subtotal energía, potencia y bono:</span>
+                    <span id="modalSubtotalBase" class="result-value">€0.00</span>
+                </div>
+                <div class="result-item">
+                    <span>Impuesto de Electricidad (5.11%):</span>
+                    <span id="modalImpuestoElectricidad" class="result-value">€0.00</span>
+                </div>
+                <div class="result-item">
+                    <span>Alquiler del contador:</span>
+                    <span id="modalAlquilerContador" class="result-value">€0.00</span>
+                </div>
+                <div class="result-item">
+                    <span>Subtotal antes de IVA/IGIC:</span>
+                    <span id="modalSubtotalAntesIVA" class="result-value">€0.00</span>
+                </div>
+                <div class="result-item">
+                    <span id="modalImpuestoFinalLabel">IVA (21%):</span>
+                    <span id="modalImpuestoFinal" class="result-value">€0.00</span>
+                </div>
+                <div class="result-item">
+                    <span>Total estimado a pagar:</span>
+                    <span id="modalTotalPagar" class="result-value">€0.00</span>
+                </div>
+                <button id="takeOfferBtnFromBillModal" class="btn-primary">
+                    <i class="fas fa-handshake"></i>
+                    Tomar esta oferta
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="offerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeOfferModal">&times;</span>
+            <h3>¡Nos encanta que quieras ahorrar!</h3>
+            <p>Déjanos tus datos y nos pondremos en contacto contigo para ofrecerte una solución personalizada y sin compromiso.</p>
+            <form id="offerForm">
+                <div class="form-group">
+                    <label for="clientName">Nombre completo:</label>
+                    <input type="text" id="clientName" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientPhone">Teléfono:</label>
+                    <input type="tel" id="clientPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientEmail">Email:</label>
+                    <input type="email" id="clientEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientMessage">Mensaje (opcional):</label>
+                    <textarea id="clientMessage" rows="3" placeholder="Ej: Me interesa la tarifa fija."></textarea>
+                </div>
+                <button type="submit">Enviar datos</button>
+            </form>
+        </div>
+    </div>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 data-aos="fade-up">Lo que dicen nuestros clientes</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-content">
+                        <p>"En solo 3 meses hemos ahorrado más de 200€ en nuestra factura. El servicio es excelente y muy profesional."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <div class="author-name">María García</div>
+                            <div class="author-role">Hogar familiar - Madrid</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-content">
+                        <p>"Como empresa, el ahorro ha sido muy significativo. Nos han ayudado a optimizar todos nuestros contratos energéticos."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <div class="author-name">Carlos Ruiz</div>
+                            <div class="author-role">Director - Pyme Valencia</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-content">
+                        <p>"El seguimiento mensual es fantástico. Siempre están pendientes de que mantengamos el ahorro conseguido."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <div class="author-name">Ana Martín</div>
+                            <div class="author-role">Comunidad de vecinos - Barcelona</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="final-cta" data-aos="fade-up">
+        <div class="container">
+            <div class="cta-content">
+                <h2>¿Empezamos a ahorrar juntos?</h2>
+                <p>Contáctanos ahora para una consulta gratuita. Te mostraremos el potencial de ahorro de tu factura sin compromiso.</p>
+                <div class="cta-buttons">
+                    <a href="https://wa.me/34691551492" class="btn-primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Escríbenos por WhatsApp
+                    </a>
+                    <a href="tel:+34691551492" class="btn-secondary">
+                        <i class="fas fa-phone"></i>
+                        Llámanos ahora
+                    </a>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Lunes a Viernes: 9:00 - 18:00</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>Respuesta en menos de 24h</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" data-aos="fade-up">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i class="fas fa-leaf"></i>
+                        <span>Tu Agente Personalizado</span>
+                    </div>
+                    <p>Especialistas en optimización energética con más de 2 años de experiencia ayudando a hogares y empresas a reducir sus costes.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#servicios">Asesoría energética</a></li>
+                        <li><a href="#servicios">Negociación de contratos</a></li>
+                        <li><a href="#servicios">Seguimiento personalizado</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contacto</h4>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <a href="https://wa.me/34691551492" target="_blank">+34 691 551 492</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+34691551492">+34 691 551 492</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tu Agente Personalizado. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/34691551492" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="tooltip">¡Escríbenos!</span>
+    </a>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar AOS
+            AOS.init({
+                duration: 800, // Duración de la animación en ms
+                once: true,    // Si las animaciones deben ocurrir solo una vez
+                mirror: false, // Si los elementos se animan al hacer scroll hacia arriba
+            });
+
+            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+            const navMobile = document.querySelector('.nav-mobile');
+            const navMobileLinks = document.querySelectorAll('.nav-mobile a');
+
+            mobileNavToggle.addEventListener('click', function() {
+                navMobile.classList.toggle('active');
+                mobileNavToggle.classList.toggle('active');
+            });
+
+            navMobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMobile.classList.remove('active');
+                    mobileNavToggle.classList.remove('active');
+                });
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!navMobile.contains(event.target) && !mobileNavToggle.contains(event.target) && navMobile.classList.contains('active')) {
+                    navMobile.classList.remove('active');
+                    mobileNavToggle.classList.remove('active');
+                }
+            });
+
+            // Lógica de la calculadora
+            const calcularBtn = document.getElementById('calcularBtn');
+            const consumoInput = document.getElementById('consumo');
+            const potenciaInput = document.getElementById('potencia');
+            const zonaSelect = document.getElementById('zona');
+
+            // Spans para los resultados DENTRO DEL MODAL
+            const modalCostoConsumoSpan = document.getElementById('modalCostoConsumo');
+            const modalCostoPotenciaP1Span = document.getElementById('modalCostoPotenciaP1');
+            const modalCostoPotenciaP2Span = document.getElementById('modalCostoPotenciaP2');
+            const modalBonoSocialSpan = document.getElementById('modalBonoSocial');
+            const modalSubtotalBaseSpan = document.getElementById('modalSubtotalBase');
+            const modalImpuestoElectricidadSpan = document.getElementById('modalImpuestoElectricidad');
+            const modalAlquilerContadorSpan = document.getElementById('modalAlquilerContador');
+            const modalSubtotalAntesIVASpan = document.getElementById('modalSubtotalAntesIVA');
+            const modalImpuestoFinalLabel = document.getElementById('modalImpuestoFinalLabel');
+            const modalImpuestoFinalSpan = document.getElementById('modalImpuestoFinal');
+            const modalTotalPagarSpan = document.getElementById('modalTotalPagar');
+            
+            // Modal de resultados de la factura
+            const billModal = document.getElementById('billModal');
+            const closeBillModalBtn = billModal.querySelector('.close-button');
+            const takeOfferBtnFromBillModal = document.getElementById('takeOfferBtnFromBillModal');
+
+
+            // Precios fijos
+            const PRECIO_KWH = 0.119; // €/kWh
+            const POTENCIA_P1_MES = 3.24489; // €/kW mes
+            const POTENCIA_P2_MES = 1.00176; // €/kW mes
+            const BONO_SOCIAL_MES = 0.38; // €/mes (0.012742 €/día * 30 días)
+            const IMPUESTO_ELECTRICIDAD_PORCENTAJE = 0.05112696; // 5.112696%
+            const ALQUILER_CONTADOR_MES = 0.80; // €/mes (0.026630€/día * 30 días)
+            const IVA_PENINSULA = 0.21; // 21%
+            const IGIC_CANARIAS = 0.07; // 7%
+
+            calcularBtn.addEventListener('click', calculateBill);
+
+            // Función para formatear a moneda
+            function formatCurrency(value) {
+                return `€${value.toFixed(2)}`;
+            }
+
+            function calculateBill() {
+                const consumo = parseFloat(consumoInput.value);
+                const potencia = parseFloat(potenciaInput.value);
+                const zona = zonaSelect.value;
+
+                if (isNaN(consumo) || isNaN(potencia) || consumo < 0 || potencia < 0) {
+                    alert('Por favor, ingresa valores numéricos positivos válidos para el consumo y la potencia.');
+                    return;
+                }
+
+                // 1. Costo por consumo
+                const costoConsumo = consumo * PRECIO_KWH;
+                modalCostoConsumoSpan.textContent = formatCurrency(costoConsumo);
+
+                // 2. Costo por potencia
+                const costoPotenciaP1 = potencia * POTENCIA_P1_MES;
+                modalCostoPotenciaP1Span.textContent = formatCurrency(costoPotenciaP1);
+
+                const costoPotenciaP2 = potencia * POTENCIA_P2_MES;
+                modalCostoPotenciaP2Span.textContent = formatCurrency(costoPotenciaP2);
+
+                // 3. Financiación Bono Social
+                modalBonoSocialSpan.textContent = formatCurrency(BONO_SOCIAL_MES);
+
+                // 4. Subtotal antes de Impuesto de Electricidad
+                const subtotalBase = costoConsumo + costoPotenciaP1 + costoPotenciaP2 + BONO_SOCIAL_MES;
+                modalSubtotalBaseSpan.textContent = formatCurrency(subtotalBase);
+
+                // 5. Impuesto de Electricidad
+                const impuestoElectricidad = subtotalBase * IMPUESTO_ELECTRICIDAD_PORCENTAJE;
+                modalImpuestoElectricidadSpan.textContent = formatCurrency(impuestoElectricidad);
+
+                // 6. Alquiler del contador
+                modalAlquilerContadorSpan.textContent = formatCurrency(ALQUILER_CONTADOR_MES);
+
+                // 7. Subtotal antes de IVA/IGIC
+                const subtotalAntesIVA = subtotalBase + impuestoElectricidad + ALQUILER_CONTADOR_MES;
+                modalSubtotalAntesIVASpan.textContent = formatCurrency(subtotalAntesIVA);
+
+                // 8. IVA/IGIC
+                let impuestoFinalMonto;
+                if (zona === 'peninsula') {
+                    impuestoFinalMonto = subtotalAntesIVA * IVA_PENINSULA;
+                    modalImpuestoFinalLabel.textContent = 'IVA (21%):';
+                } else { // Canarias
+                    impuestoFinalMonto = subtotalAntesIVA * IGIC_CANARIAS;
+                    modalImpuestoFinalLabel.textContent = 'IGIC (7%):';
+                }
+                modalImpuestoFinalSpan.textContent = formatCurrency(impuestoFinalMonto);
+
+                // 9. Total a pagar
+                const totalPagar = subtotalAntesIVA + impuestoFinalMonto;
+                modalTotalPagarSpan.textContent = formatCurrency(totalPagar);
+
+                // Muestra el modal de resultados
+                billModal.classList.add('show');
+                // Asegura que el contenido del modal también se anime
+                billModal.querySelector('.modal-content').style.transform = 'translateY(0)';
+                billModal.querySelector('.modal-content').style.opacity = '1';
+            }
+
+            // Lógica del Modal de Resultados de Factura
+            closeBillModalBtn.addEventListener('click', () => {
+                billModal.classList.remove('show');
+                billModal.querySelector('.modal-content').style.transform = 'translateY(20px)';
+                billModal.querySelector('.modal-content').style.opacity = '0';
+            });
+
+            // Lógica del Modal de Oferta (EXISTENTE)
+            const offerModal = document.getElementById('offerModal');
+            const closeOfferModal = document.getElementById('closeOfferModal'); // Nuevo ID para diferenciar
+            const offerForm = document.getElementById('offerForm');
+
+            // El botón "Tomar esta oferta" del MODAL DE RESULTADOS
+            takeOfferBtnFromBillModal.addEventListener('click', () => {
+                billModal.classList.remove('show'); // Cierra el modal de resultados
+                offerModal.classList.add('show'); // Abre el modal de oferta
+                // Asegura que el contenido del modal también se anime
+                offerModal.querySelector('.modal-content').style.transform = 'translateY(0)';
+                offerModal.querySelector('.modal-content').style.opacity = '1';
+            });
+
+            closeOfferModal.addEventListener('click', () => {
+                offerModal.classList.remove('show');
+                offerModal.querySelector('.modal-content').style.transform = 'translateY(20px)';
+                offerModal.querySelector('.modal-content').style.opacity = '0';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target == offerModal) {
+                    offerModal.classList.remove('show');
+                    offerModal.querySelector('.modal-content').style.transform = 'translateY(20px)';
+                    offerModal.querySelector('.modal-content').style.opacity = '0';
+                } else if (event.target == billModal) {
+                    billModal.classList.remove('show');
+                    billModal.querySelector('.modal-content').style.transform = 'translateY(20px)';
+                    billModal.querySelector('.modal-content').style.opacity = '0';
+                }
+            });
+
+            offerForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // Previene el envío por defecto del formulario
+
+                const clientName = document.getElementById('clientName').value;
+                const clientPhone = document.getElementById('clientPhone').value;
+                const clientEmail = document.getElementById('clientEmail').value;
+                const clientMessage = document.getElementById('clientMessage').value;
+
+                // Aquí es donde enviarías los datos a tu servidor o un servicio de email
+                console.log('Datos del cliente:', {
+                    name: clientName,
+                    phone: clientPhone,
+                    email: clientEmail,
+                    message: clientMessage
+                });
+
+                alert('¡Gracias por tu interés! Nos pondremos en contacto contigo muy pronto.');
+                offerForm.reset(); // Limpia el formulario
+                offerModal.classList.remove('show'); // Cierra el modal
+                offerModal.querySelector('.modal-content').style.transform = 'translateY(20px)';
+                offerModal.querySelector('.modal-content').style.opacity = '0';
+            });
+        });
+    </script>
+</body>
+</html>
