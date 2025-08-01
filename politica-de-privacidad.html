@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad - Tu Agente Personalizado</title>
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root{--primary-green:#0D4F3C;--accent-green:#2E8B57;--light-green:#48C78E;--emerald:#00D4AA;--primary-dark:#1a1a1a;--secondary-dark:#2c3e50;--text-dark:#2c3e50;--text-light:#6c757d;--background-light:#f8fffe;--white:#ffffff;--success:#00C851;--gana-100:#e6f7f0}*{margin:0;padding:0;box-sizing:border-box}
+        html { scroll-behavior: smooth; }
+        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;color:var(--text-dark);background-color:var(--background-light);}
+        .container{max-width:1200px;margin:0 auto;padding:0 20px}#mainHeader{position:fixed;top:0;width:100%;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);z-index:1000;transition:all .3s ease;box-shadow:0 2px 10px rgba(0,0,0,0.05)}#mainHeader .container{display:flex;justify-content:space-between;align-items:center;padding:1rem 20px}.logo{display:flex;align-items:center;font-weight:700;color:var(--accent-green);font-size:1.3em;gap:8px;text-decoration:none}.nav-desktop{display:none;gap:2rem}.nav-desktop a{color:var(--text-dark);text-decoration:none;font-weight:500;transition:color .3s ease}.nav-desktop a:hover{color:var(--accent-green)}.mobile-nav-toggle{display:flex;flex-direction:column;background:none;border:none;cursor:pointer;padding:5px;z-index:1001}.mobile-nav-toggle span{width:25px;height:3px;background:var(--accent-green);margin:3px 0;transition:.3s}.mobile-nav-toggle.active span:nth-child(1){transform:rotate(-45deg) translate(-6px,6px)}.mobile-nav-toggle.active span:nth-child(2){opacity:0}.mobile-nav-toggle.active span:nth-child(3){transform:rotate(45deg) translate(-6px,-6px)}.nav-mobile{position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);padding-top:80px;z-index:999;display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateX(100%);transition:opacity .3s ease,transform .3s ease,visibility .3s ease}.nav-mobile.active{opacity:1;visibility:visible;transform:translateX(0)}.nav-mobile a{display:block;padding:1rem 20px;color:var(--text-dark);text-decoration:none;border-bottom:1px solid #eee;font-weight:500;transition:all .3s ease}.nav-mobile a:hover{background:rgba(13,79,60,0.05);color:var(--accent-green);padding-left:30px}
+        .footer{background:var(--primary-dark);color:var(--white);padding:3rem 0 1rem}.footer-content{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem}.footer-logo{display:flex;align-items:center;gap:8px;font-size:1.3rem;font-weight:700;margin-bottom:1rem}.footer-brand p{color:#ccc;line-height:1.6}.footer-links h4{color:var(--light-green);margin-bottom:1rem}.footer-links ul{list-style:none;padding:0}.footer-links li{margin-bottom:.5rem}.footer-links a{color:#ccc;text-decoration:none;transition:color .3s ease}.footer-links a:hover{color:var(--white)}.footer-contact h4{color:var(--light-green);margin-bottom:1rem}.footer-contact .contact-item{margin-bottom:.5rem;display:flex;align-items:center;gap:8px}.footer-contact a{color:#ccc;text-decoration:none;transition:color .3s ease}.footer-contact a:hover{color:var(--white)}.footer-bottom{border-top:1px solid #333;padding-top:1.5rem;margin-top:1rem;text-align:center;color:#999}.footer-legal-links{list-style:none;padding:0;display:flex;justify-content:center;gap:1.5rem;margin-top:1rem;font-size:.9rem}.footer-legal-links a{color:#ccc;text-decoration:none}.footer-legal-links a:hover{color:var(--white)}.signature{font-size:.8rem;color:#777;margin-top:1.5rem}
+        .legal-section { padding: 120px 0 80px; }
+        .legal-content-wrapper { background-color: var(--white); padding: 2.5rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); max-width: 800px; margin: 0 auto; }
+        .legal-content-wrapper h1 { font-size: 2.5rem; color: var(--primary-green); border-bottom: 2px solid var(--accent-green); padding-bottom: 1rem; margin-bottom: 2rem; }
+        .legal-content-wrapper h2 { font-size: 1.8rem; color: var(--primary-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
+        .legal-content-wrapper p, .legal-content-wrapper li { color: var(--text-light); margin-bottom: 1em; }
+        .legal-content-wrapper strong { color: var(--text-dark); }
+        .legal-content-wrapper a { color: var(--accent-green); font-weight: 600; text-decoration: none; }
+        .legal-content-wrapper a:hover { text-decoration: underline; }
+        .legal-content-wrapper ul { padding-left: 20px; }
+        .legal-content-wrapper ul ul { margin-top: 0.5em; margin-bottom: 1em; }
+        .footer-back { text-align: center; margin-top: 40px; }
+        .footer-back a { display: inline-block; padding: 10px 20px; background-color: var(--accent-green); color: white; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background-color .3s; }
+        .footer-back a:hover { background-color: var(--primary-green); }
+        @media (min-width: 768px) { .nav-desktop { display: flex; } .mobile-nav-toggle { display: none; } }
+        @media (max-width: 768px) { .legal-section { padding: 100px 0 60px; } .legal-content-wrapper h1 { font-size: 2rem; } .legal-content-wrapper h2 { font-size: 1.5rem; } .footer-content{grid-template-columns:1fr;text-align:center;}.footer-logo{justify-content:center}.footer-contact .contact-item{justify-content:center}}
+    </style>
+</head>
+<body>
+
+    <header id="mainHeader">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>Tu Agente Personalizado</span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="index.html#inicio">Inicio</a>
+                <a href="index.html#servicios">Servicios</a>
+                <a href="index.html#calculadora">Calculadora</a>
+                <a href="index.html#contacto">Contacto</a>
+            </nav>
+            <button class="mobile-nav-toggle" aria-label="Menú móvil">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <nav class="nav-mobile">
+            <a href="index.html#inicio">Inicio</a>
+            <a href="index.html#servicios">Servicios</a>
+            <a href="index.html#calculadora">Calculadora</a>
+            <a href="index.html#faq">FAQ</a>
+            <a href="index.html#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="legal-section">
+            <div class="container">
+                <div class="legal-content-wrapper">
+                    <h1>Política de Privacidad</h1>
+                    <p>
+                        La presente Política de Privacidad establece los términos en que el Titular usa y protege la información que es proporcionada por sus usuarios, en especial aquellos residentes en la Unión Europea, en cumplimiento del Reglamento (UE) 2016/679 (RGPD).
+                    </p>
+            
+                    <h2>1. Responsable del Tratamiento y Representante en la UE</h2>
+                    <ul>
+                        <li><strong>Responsable del Tratamiento (Establecido fuera de la UE):</strong>
+                            <ul>
+                                <li><strong>Titular:</strong> JOSE LUIS PARRA GAMARRA</li>
+                                <li><strong>Identificación (NIT):</strong> 1045696358-5</li>
+                                <li><strong>Domicilio:</strong> Carrera 53 #80-198, Barranquilla, Colombia</li>
+                                <li><strong>País:</strong> Colombia</li>
+                                <li><strong>Correo electrónico:</strong> jlparra@tuagentepersonalizado.es</li>
+                            </ul>
+                        </li>
+                        <br>
+                        <li><strong>Representante del Responsable en la Unión Europea (Art. 27 RGPD):</strong>
+                            <ul>
+                                <li><strong>Nombre:</strong> SIMBAT POGHOSYAN</li>
+                                <li><strong>CIF:</strong> X3318907F</li>
+                                <li><strong>Dirección en la UE:</strong> P.º de la Castellana, 43, Chamberí, 28046 Madrid, España</li>
+                                <li><strong>Email de contacto:</strong> simbat@tuagentepersonalizado.es</li>
+                            </ul>
+                        </li>
+                    </ul>
+            
+                    <h2>2. Finalidad del Tratamiento de los Datos</h2>
+                    <p>Tratamos la información que nos facilita con el fin de:</p>
+                    <ul>
+                        <li><strong>Formularios de contacto y oferta:</strong> Gestionar su solicitud de información o de una oferta personalizada para la consultoría energética.</li>
+                        <li><strong>Suscripción al boletín (Newsletter):</strong> Enviarle comunicaciones comerciales sobre nuestros servicios, siempre que contemos con su consentimiento.</li>
+                        <li><strong>Cookies:</strong> Mejorar la experiencia de usuario, tal y como se detalla en nuestra <a href="politica-de-cookies.html">Política de Cookies</a>.</li>
+                    </ul>
+            
+                    <h2>3. Legitimación para el tratamiento de sus datos</h2>
+                    <p>
+                        La base legal para el tratamiento de sus datos es el consentimiento explícito que se le solicita para cada una de las finalidades descritas, el cual deberá ser otorgado mediante la marcación de la casilla de aceptación correspondiente en nuestros formularios.
+                    </p>
+                    
+                    <h2>4. Transferencia Internacional de Datos</h2>
+                    <p>
+                        Le informamos de que sus datos personales serán tratados fuera del Espacio Económico Europeo, concretamente en Colombia, donde se encuentra ubicado el Responsable del Tratamiento. Esta transferencia internacional es necesaria para la prestación del servicio. Al no contar Colombia con una decisión de adecuación por parte la Comisión Europea, la transferencia se legitima a través de su <strong>consentimiento explícito e informado</strong>, que usted otorga al aceptar esta política. El Titular garantiza que sus datos serán tratados con las garantías de seguridad y confidencialidad exigidas por el RGPD.
+                    </p>
+            
+                    <h2>5. Tiempo de Conservación de los Datos</h2>
+                    <p>
+                        Los datos personales se conservarán mientras se mantenga la relación comercial, no se solicite su supresión por el interesado o durante los plazos legales aplicables.
+                    </p>
+            
+                    <h2>6. Destinatarios de los datos</h2>
+                    <p>
+                        Sus datos no se cederán a terceros salvo obligación legal. Podrán tener acceso a ellos nuestros proveedores de servicios (hosting, gestoría, etc.) en calidad de encargados del tratamiento, con quienes se han firmado los correspondientes contratos de confidencialidad.
+                    </p>
+            
+                    <h2>7. Derechos del Usuario (RGPD)</h2>
+                    <p>
+                        Como interesado residente en la Unión Europea, puede ejercer sus derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición.
+                    </p>
+                    <p>
+                        Puede ejercer sus derechos dirigiéndose, preferentemente, a nuestro <strong>Representante en la Unión Europea</strong> a través del correo electrónico: <strong>simbat@tuagentepersonalizado.es</strong>.
+                    </p>
+                    <p>
+                        Alternativamente, puede contactar directamente al Responsable del Tratamiento en el correo electrónico: <strong>jlparra@tuagentepersonalizado.es</strong>. En ambos casos, deberá identificarse debidamente. Si considera que sus derechos no han sido atendidos, tiene derecho a presentar una reclamación ante la autoridad de control competente (en España, la Agencia Española de Protección de Datos - AEPD).
+                    </p>
+            
+                    <p><em>Última actualización: 31 de julio de 2025</em></p>
+                    
+                    <div class="footer-back">
+                        <a href="index.html">Volver a la página principal</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i class="fas fa-leaf"></i>
+                        <span>Tu Agente Personalizado</span>
+                    </div>
+                    <p>Tu asesoría energética amiga. Te ayudamos a reducir tus facturas en Madrid, Barcelona, Valencia, Málaga y resto de España.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="index.html#servicios">Análisis de Facturas</a></li>
+                        <li><a href="index.html#servicios">Negociación de Tarifas</a></li>
+                        <li><a href="index.html#servicios">Optimización Continua</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="aviso-legal.html">Aviso Legal</a></li>
+                        <li><a href="politica-de-privacidad.html">Política de Privacidad</a></li>
+                        <li><a href="politica-de-cookies.html">Política de Cookies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contacto</h4>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                        <a href="https://wa.me/34691551492" target="_blank" rel="noopener noreferrer">+34 691 551 492</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone" aria-hidden="true"></i>
+                        <a href="tel:+34691551492">+34 691 551 492</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tu Agente Personalizado. Todos los derechos reservados.</p>
+                <p class="signature">Powered by Jose Luis Parra</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+            const navMobile = document.querySelector('.nav-mobile');
+            mobileNavToggle.addEventListener('click', () => {
+                navMobile.classList.toggle('active');
+                mobileNavToggle.classList.toggle('active');
+            });
+            document.querySelectorAll('.nav-mobile a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMobile.classList.remove('active');
+                    mobileNavToggle.classList.remove('active');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
